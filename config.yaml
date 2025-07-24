@@ -1,0 +1,42 @@
+# ==========================================================
+# 🌿 Common Repository Configuration
+# ==========================================================
+repository:
+  owner: Ram-Tech-Maestro
+  name: branch-cleaner-test-repo
+  clone_url: https://github.com/Ram-Tech-Maestro/branch-cleaner-test-repo.git
+  base_branch: main
+
+# ==========================================================
+# ⚙️ Global Options
+# ==========================================================
+options:
+  dry_run: false      # true: simulate actions without push/write
+  log_level: INFO     # DEBUG | INFO | WARN | ERROR
+  timezone: Asia/Kolkata
+
+# ==========================================================
+# 🛠️ Test Branch Generator Bot Configuration
+#   Used by: generate_stale_branches_local.py
+# ==========================================================
+test_branch_generator:
+  stale_days_list:
+    - 60
+    - 90
+  orphan_branch_names:
+    - orphan-branch-1
+    - orphan-branch-2
+
+# ==========================================================
+# 🧹 Cleanup Bot Configuration
+#   Used by: cleanup_bot.py
+# ==========================================================
+cleanup_bot:
+  stale_days_threshold: 45                  # Days since last commit to mark as stale
+  grace_period_days: 7                      # Grace period before deletion (not auto-delete now, only logs)
+  excluded_branches:
+    - main
+    - dev
+    - release/*
+  notification_issue_title: "[BOT] Stale Branch Notification"
+  log_file: stale_orphan_branches_report.md
