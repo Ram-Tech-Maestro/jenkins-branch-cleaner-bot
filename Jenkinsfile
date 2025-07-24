@@ -21,8 +21,10 @@ pipeline {
             steps {
                 sh '''
                     python3 --version
-                    pip3 install --upgrade pip
-                    pip3 install -r requirements.txt
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
                 '''
             }
         }
@@ -30,7 +32,8 @@ pipeline {
         stage('Run Cleanup Bot') {
             steps {
                 sh '''
-                    python3 cleanup_bot.py
+                    . venv/bin/activate
+                    python cleanup_bot.py
                 '''
             }
         }
