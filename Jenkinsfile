@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.12-slim'
-            args '-u root' // to allow pip installs if needed
-        }
-    }
+    agent any
 
     environment {
         GITHUB_TOKEN = credentials('GITHUB_PAT') // Jenkins credential ID
@@ -25,9 +20,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    python --version
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                    python3 --version
+                    pip3 install --upgrade pip
+                    pip3 install -r requirements.txt
                 '''
             }
         }
@@ -35,7 +30,7 @@ pipeline {
         stage('Run Cleanup Bot') {
             steps {
                 sh '''
-                    python cleanup_bot.py
+                    python3 cleanup_bot.py
                 '''
             }
         }
